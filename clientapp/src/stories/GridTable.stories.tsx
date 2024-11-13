@@ -20,37 +20,72 @@ export default meta;
 
 type Story = StoryObj<StoryProps>;
 
-export const MiddleNorth: Story = {
+export const ZeroOneWest: Story = {
     args: {
-        positionAndDirection: "2,2 NORTH",
+        positionAndDirection: "0,1 WEST",
     },
     render: (args) => <GridTable {...args} />,
 };
 
-export const BottomLeftNorth: Story = {
+export const ZeroZeroSouth: Story = {
     args: {
-        positionAndDirection: "0,0 NORTH",
+        positionAndDirection: "0,0 SOUTH",
     },
     render: (args) => <GridTable {...args} />,
 };
 
-export const TopLeftNorth: Story = {
+export const ZeroFourEast: Story = {
     args: {
-        positionAndDirection: "0,4 NORTH",
+        positionAndDirection: "0,4 EAST",
     },
     render: (args) => <GridTable {...args} />,
 };
 
-export const TopRightNorth: Story = {
+export const FourFourNorth: Story = {
     args: {
         positionAndDirection: "4,4 NORTH",
     },
     render: (args) => <GridTable {...args} />,
 };
 
-export const BottomRightNorth: Story = {
+export const FourZeroNorth: Story = {
     args: {
         positionAndDirection: "4,0 NORTH",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const TwoTwoWest: Story = {
+    args: {
+        positionAndDirection: "2,2 WEST",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const ThreeOneEast: Story = {
+    args: {
+        positionAndDirection: "3,1 EAST",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const ThreeTwoWest: Story = {
+    args: {
+        positionAndDirection: "3,2 WEST",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const ZeroTwoEast: Story = {
+    args: {
+        positionAndDirection: "0,2 EAST",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const FourTwoEast: Story = {
+    args: {
+        positionAndDirection: "4,2 EAST",
     },
     render: (args) => <GridTable {...args} />,
 };
@@ -62,9 +97,23 @@ export const InvalidCoordinates: Story = {
     render: (args) => <GridTable {...args} />,
 };
 
-export const InvalidInput: Story = {
+export const InvalidDirection: Story = {
     args: {
         positionAndDirection: "3,1 SOUTHWEST",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const InvalidInput: Story = {
+    args: {
+        positionAndDirection: "3,4SOUTHWEST",
+    },
+    render: (args) => <GridTable {...args} />,
+};
+
+export const CharacterInput: Story = {
+    args: {
+        positionAndDirection: "Three,Two East",
     },
     render: (args) => <GridTable {...args} />,
 };
