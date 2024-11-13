@@ -3,39 +3,44 @@ import "./GridTable.css";
 import { Box, Grid2, Typography } from "@mui/material";
 import { North, South, East, West } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
+import { ILocation } from "../../interfaces/ILocation";
+import { parseLocation } from "../../helpers/Parser";
+import config from "../../config.json";
 
 type Props = {
     positionAndDirection: string;
 };
 
-interface ILocation {
-    x: number;
-    y: number;
-    direction: string;
-}
-
 const GridTable = ({ positionAndDirection }: Props) => {
     const [location, setLocation] = useState<ILocation | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     useEffect(() => {
-        const match = positionAndDirection.match(/^(\d),(\d)\s(NORTH|SOUTH|EAST|WEST)$/);
-        if (match) {
-            const x = parseInt(match[1], 10);
-            const y = parseInt(match[2], 10);
-            const direction = match[3];
-            if (x >= 0 && x < 5 && y >= 0 && y < 5) {
-                setLocation({ x, y, direction });
-            } else {
-                console.log("Invalid");
-            }
-        } else {
-            console.log("Invalid");
-        }
+        processPositionAndDirection(positionAndDirection);
     }, [positionAndDirection]);
 
-    useEffect(() => {
-        console.log(location);
-    }, [location]);
+    const processPositionAndDirection = (inputString: string) => {
+        const parsedLocation = parseLocation(inputString);
+
+        if (parsedLocation) {
+            const { x, y, direction } = parsedLocation;
+
+            if (isValidCoordinate(x, y)) {
+                setErrorMessage("");
+                setLocation({ x, y, direction });
+            } else {
+                setErrorMessage(`You can only input from range 0-${config.GRID_SIZE - 1}.`);
+                setLocation(null);
+            }
+        } else {
+            setErrorMessage("Invalid input format. Use 'x,y DIRECTION' (e.g., '1,1 NORTH')");
+            setLocation(null);
+        }
+    };
+
+    const isValidCoordinate = (x: number, y: number): boolean => {
+        return x >= 0 && x < config.GRID_SIZE && y >= 0 && y < config.GRID_SIZE;
+    };
 
     const renderIcon = (direction: string) => {
         switch (direction) {
@@ -54,9 +59,9 @@ const GridTable = ({ positionAndDirection }: Props) => {
 
     const renderGrid = () => {
         const grid = [];
-        for (let y = 4; y >= 0; y--) {
+        for (let y = config.GRID_SIZE - 1; y >= 0; y--) {
             const row = [];
-            for (let x = 0; x < 5; x++) {
+            for (let x = 0; x < config.GRID_SIZE; x++) {
                 row.push(
                     <Grid2
                         key={uuidv4()}
@@ -90,9 +95,13 @@ const GridTable = ({ positionAndDirection }: Props) => {
             <Box sx={{ bgcolor: "blue", mt: "32px", display: "inline-block", height: 300, width: 300 }}>
                 {renderGrid()}
             </Box>
-            {location && (
-                <Typography>{`x: ${location.x}, y: ${location.y}, direction: ${location.direction}`}</Typography>
-            )}
+            <Typography
+                sx={{
+                    color: errorMessage ? "#DC3545" : "#000000",
+                }}
+            >
+                {location ? `x: ${location.x}, y: ${location.y}, direction: ${location.direction}` : errorMessage}
+            </Typography>
         </>
     );
 };
