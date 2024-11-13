@@ -17,7 +17,7 @@ const GridTable = ({ positionAndDirection }: Props) => {
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     useEffect(() => {
-        processPositionAndDirection(positionAndDirection);
+        if (positionAndDirection) processPositionAndDirection(positionAndDirection);
     }, [positionAndDirection]);
 
     const processPositionAndDirection = (inputString: string) => {
@@ -27,6 +27,7 @@ const GridTable = ({ positionAndDirection }: Props) => {
             const { x, y, direction } = parsedLocation;
 
             if (isValidCoordinate(x, y)) {
+                console.log("hehe");
                 setErrorMessage("");
                 setLocation({ x, y, direction });
             } else {
