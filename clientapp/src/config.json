@@ -1,7 +1,7 @@
 {
     "GRID_SIZE": 5,
     "LOCATION_INPUT_INFO": "Use 'x,y DIRECTION' (e.g., '1,1 NORTH')",
-    "ERROR_MESSAGE_GRIDTABLE_INVALID": "Accepted Directions: NORTH, SOUTH, EAST, & WEST",
+    "ERROR_MESSAGE_GRIDTABLE_INVALID": "Use 'x,y DIRECTION' (e.g., '1,1 NORTH'). Accepted Directions: NORTH, SOUTH, EAST, & WEST",
     "ERROR_MESSAGE_GRIDTABLE_COORDINATES": "You can only input coordinates from 0-%GRID_SIZE%.",
     "ERROR_MESSAGE_INPUT_INVALID": "Invalid. Use 'x,y DIRECTION' (e.g., '1,1 NORTH')",
     "ERROR_MESSAGE_INPUT_COORDINATES": "You can only input coordinates from 0-%GRID_SIZE%."
