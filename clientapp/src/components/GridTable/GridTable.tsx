@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ILocation } from "../../interfaces/ILocation";
 import { parseLocation } from "../../helpers/Parser";
 import config from "../../config.json";
+import { isValidCoordinate } from "../../helpers/Validator";
 
 type Props = {
     positionAndDirection: string;
@@ -29,17 +30,15 @@ const GridTable = ({ positionAndDirection }: Props) => {
                 setErrorMessage("");
                 setLocation({ x, y, direction });
             } else {
-                setErrorMessage(`You can only input from range 0-${config.GRID_SIZE - 1}.`);
+                setErrorMessage(
+                    config.ERROR_MESSAGE_INPUT_COORDINATES.replace("%GRID_SIZE%", (config.GRID_SIZE - 1).toString())
+                );
                 setLocation(null);
             }
         } else {
-            setErrorMessage("Invalid input format. Use 'x,y DIRECTION' (e.g., '1,1 NORTH')");
+            setErrorMessage(config.ERROR_MESSAGE_GRIDTABLE_INVALID);
             setLocation(null);
         }
-    };
-
-    const isValidCoordinate = (x: number, y: number): boolean => {
-        return x >= 0 && x < config.GRID_SIZE && y >= 0 && y < config.GRID_SIZE;
     };
 
     const renderIcon = (direction: string) => {
@@ -97,6 +96,7 @@ const GridTable = ({ positionAndDirection }: Props) => {
             </Box>
             <Typography
                 sx={{
+                    marginTop: "1rem",
                     color: errorMessage ? "#DC3545" : "#000000",
                 }}
             >
