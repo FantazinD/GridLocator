@@ -27,7 +27,6 @@ const GridTable = ({ positionAndDirection }: Props) => {
             const { x, y, direction } = parsedLocation;
 
             if (isValidCoordinate(x, y)) {
-                console.log("hehe");
                 setErrorMessage("");
                 setLocation({ x, y, direction });
             } else {
