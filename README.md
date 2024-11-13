@@ -1,2 +1,2 @@
-# FiableFrontendAssessment
-Fiable React Frontend Exam
+# Grid Locator
+ReactJS and Storybook
